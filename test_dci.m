@@ -22,11 +22,14 @@ codeword = Encode_DCI(DM,crc_type);
 
 % Get the PDCCH QPSK symbols nrPDCCH
 
-nID = 17;
-n_RNTI = 1;
-symbols = get_pdcch_symbols(codeword, nID, n_RNTI);
+%nID = 17;
+%n_RNTI = 1;
+%symbols = get_pdcch_symbols(codeword, nID, n_RNTI);
 
 % Необходимо произвести слепое декодирование битов DCI 
 
 %decode_dci = decode_payload(nID, n_RNTI);
-
+K = 39;
+L = 16;
+dcibits = Decode_DCI(codeword,crc_type);
+dcibits_test = nrDCIDecode(codeword.',K,L);

@@ -1,9 +1,9 @@
 %DCI format 1_0 with CRC scrambled by SI-RNTI
 function dci = genDCI(                     ...
-    FDRA,                                  ... %FrequencyDomainResourceAssignment
+    FDRA,                                  ...%FrequencyDomainResourceAssignment
     TDRA,                                  ...%TimeDomainResourceAssignment
     VRB_to_PRB,                            ...%VRB_to_PRB
-    ModulationAndCodingScheme,             ...% ModulationAndCodingScheme
+    ModulationAndCodingScheme,             ...%ModulationAndCodingScheme
     RedundancyVersion,                     ...%RedundancyVersion
     SII,                                   ...%SystemInformationIndicator
     ReservedBits                           ...%ReservedBits
