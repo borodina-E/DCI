@@ -1,7 +1,7 @@
 
-% test 
+% test
 
-% введём параметры для функции getDCI
+% denote getDCI parameters
 FDRA = 10;
 TDRA = 1;
 VrbPrb = 0;
@@ -10,26 +10,31 @@ redundancy_Version = 0;
 SII = 0;
 ReservedBits = zeros(1,15);
 
-% получим биты dci для формата format 1_0 в соответствие со стандартом
+% get dci format 1_0 according to the TS
 DM = genDCI(FDRA, TDRA, VrbPrb,modulation_and_coding_scheme,redundancy_Version, SII,ReservedBits);
 
-
-% закодируем биты полезной нагрузки 38.212 с использование CRC attachment (раздел 7.3.2),
-% Channel coding (7.3.3), Rate mathcing (раздел 7.3.4).
+% payload coding 38.212: CRC attachment (7.3.2),
+% Channel coding (7.3.3), Rate mathcing (7.3.4).
 crc_type = 'crc24c';
 
+%encoding
 codeword = Encode_DCI(DM,crc_type);
 
-% Get the PDCCH QPSK symbols nrPDCCH
+%dci encoding test
+nID = 2;
+n_RNTI = 1;
+codeword_test = nrDCIEncode(DM.',n_RNTI, 864);
+isequal(codeword_test, codeword .');
 
-%nID = 17;
-%n_RNTI = 1;
-%symbols = get_pdcch_symbols(codeword, nID, n_RNTI);
-
-% Необходимо произвести слепое декодирование битов DCI 
-
-%decode_dci = decode_payload(nID, n_RNTI);
-K = 39;
-L = 16;
+%decoding
 dcibits = Decode_DCI(codeword,crc_type);
-dcibits_test = nrDCIDecode(codeword.',K,L);
+
+%dci decoding test
+K = 39;
+L = 8;
+dcibits_test = nrDCIDecode(codeword.',K,L,n_RNTI);
+isequal(dcibits_test, dcibits .')
+
+%common test (our functions)
+isequal(DM, dcibits);
+

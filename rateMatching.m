@@ -13,12 +13,12 @@ function out_seq = rateMatching(in_seq)
     sequence(1:N) = in_seq(J(1:N)+1); % main procedure
     N = length(sequence); % length of input sequence    
     E = 864; % lenght of output sequence [TS 38.212, 7.1.5]
-    K = 56; % length of output sequence of polar coder
-    if E >= N
-        out_seq(1:E) = sequence(mod(0:(E-1),N)+1);
+    K = 512; % length of output sequence of polar coder
+    if E >= N 
+        out_seq(1:E) = sequence(mod(0:(E-1),N)+1); %???
         return
     elseif (K/E) <= (7/16)
-        out_seq(1:E) = sequence(1:E+N-E);
+        out_seq(1:E) = sequence(1:E+N-E); 
         return
     end
     out_seq(1:E) = sequence(1:E);
