@@ -46,3 +46,5 @@ symbols = get_pdcch_symbols(codeword, nID, n_RNTI);
 % Для этого: 1 - демодуляция; 2 - дескремблирование 
 
 received_codeword = de_get_pdcch_symbols(symbols, nID, n_RNTI);
+
+%gg
