@@ -31,8 +31,8 @@ function out_seq = polarCoding(in_seq)
     out_seq(i) = in_seq(P(i)+1);
     end
     
-   K = 63; %56
-   N = 512; %512
+   K = 63; 
+   N = 512; 
   %K = length(in_seq)
   %N = 2^ceil(log2(K)); 
 
@@ -48,7 +48,7 @@ function out_seq = polarCoding(in_seq)
         end
     end
     
-    Q_I_N = Q_0_N((end-K+1):end); %???
+    Q_I_N = Q_0_N((end-K+1):end); 
 
     G_2 = ones(2, 2);
     G_2(1, 2) = 0;

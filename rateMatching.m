@@ -15,7 +15,7 @@ function out_seq = rateMatching(in_seq)
     E = 864; % lenght of output sequence [TS 38.212, 7.1.5]
     K = 512; % length of output sequence of polar coder
     if E >= N 
-        out_seq(1:E) = sequence(mod(0:(E-1),N)+1); %???
+        out_seq(1:E) = sequence(mod(0:(E-1),N)+1);
         return
     elseif (K/E) <= (7/16)
         out_seq(1:E) = sequence(1:E+N-E); 

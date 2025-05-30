@@ -10,14 +10,21 @@ arguments
         n_RNTI (1,1)   % CRC mask required to decode the DCI message
 end
 
-% modeling a scrambling sequence
-cinit = mod(double(n_RNTI)*2^16 + double(nID),2^31);
+% use function scrambling_pdcch. Get scrambled_bits
+scrambled_bits = scrambling_pdcch(codeword, n_RNTI, nID);
 
-% getting the scrambling bits
-scrambled = xor(codeword, cinit);
+% getting scrambled sequence for matlab
+len = length(codeword);
+sequence_2 = nrPDCCHPRBS(nID, n_RNTI,len);
+sequence_2_2 = sequence_2'; 
+
+% getting the scrambling bits for matlab
+scrambled_bits_2 = mod(codeword + sequence_2_2,2);
+%scrambled_bits_2_2 = scrambled_bits_2';
+
+isequal(scrambled_bits, scrambled_bits_2);
 
 % modulation QPSK. qpskModulation - взято у Валентина
-symbols = qpskModulation(scrambled);
-
+symbols = qpskModulation(scrambled_bits);
 
 end
